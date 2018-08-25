@@ -60,10 +60,10 @@ namespace STG.State
             switch (selectedMenu)
             {
                 case "Start":
-                    currentMenus = difficultyMenus;
+                    //currentMenus = difficultyMenus;
+                    main.ChangeState(new Playing(main, graphics));
                     break;
                 case "Easy":
-                    main.ChangeState(new Playing(main, graphics));
                     break;
                 case "Normal":
                     break;

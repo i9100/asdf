@@ -149,7 +149,7 @@ namespace STG.Entity
                         new Particle.State()
                         {
                             Velocity = rand.NextVector2(0, 6),
-                            Type = Particle.ParticleType.Bullet,
+                            //Type = Particle.ParticleType.Bullet,
                             LengthMultiplier = 1,
                             Gravity = 0.75f
                         });
@@ -172,7 +172,7 @@ namespace STG.Entity
                 var state = new Particle.State()
                 {
                     Velocity = rand.NextVector2(speed, speed),
-                    Type = Particle.ParticleType.Enemy,
+                    //Type = Particle.ParticleType.Enemy,
                     LengthMultiplier = 0.6f
                 };
 
@@ -389,7 +389,6 @@ namespace STG.Entity
                 {
                     if (cooldownTimer <= 0)
                     {
-                        Shoot(EnemyBullet.LinearBullet2(image, Position, acceleration, rand.NextFloat(0, 360)));
                         Shoot(EnemyBullet.LinearBullet(image, Position, acceleration, rand.NextFloat(0, 360)));
 
                         cooldownTimer = rand.Next(cooldown - minMax, cooldown + minMax);

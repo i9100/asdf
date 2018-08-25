@@ -27,11 +27,21 @@ namespace STG.Stage
             IEnumerable<Schema> stage = Parse(StageDocument.one);
             foreach(var stageData in stage)
             {
-                object[] args = { stageData.Position };
+                Console.WriteLine(stageData.Position);
 
                 await Task.Delay(stageData.Delay);
 
-                InvokeMethod(stageData.Name, args);
+                if (stageData.Name == "End")
+                {
+                    Update(1);
+                }
+
+                else
+                {
+                    object[] args = { stageData.Position };
+
+                    InvokeMethod(stageData.Name, args);
+                }
             }
         }
     }

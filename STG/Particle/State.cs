@@ -3,12 +3,12 @@ using System;
 
 namespace STG.Particle
 {
-    public enum ParticleType { None, Enemy, Bullet, IgnoreGravity }
+    //public enum ParticleType { None, Enemy, Bullet, IgnoreGravity }
 
     public struct State
     {
         public Vector2 Velocity;
-        public ParticleType Type;
+        //public ParticleType Type;
         public float LengthMultiplier;
         public float Gravity;
 

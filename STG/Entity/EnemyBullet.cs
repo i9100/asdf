@@ -176,6 +176,67 @@ namespace STG.Entity
             }
         }
 
+        IEnumerable<int> Untitled4(float angle, float acceleration)
+        {
+            float rad = angle.ToRadian();
+            float rad1 = (angle - 180).ToRadian();
+            Vector2 velocity = new Vector2((float)Math.Cos(rad), (float)Math.Sin(rad));
+            Vector2 velocity1 = new Vector2((float)Math.Cos(rad1), (float)Math.Sin(rad1));
+            while (true)
+            {
+
+                for (int i = 0; i < 90; i++)
+                {
+                    Velocity = velocity.ScaleTo(6f);
+
+                    yield return 0;
+                }
+
+                for (int i = 0; i < 900; i++)
+                {
+
+                    Velocity = velocity1.ScaleTo(1f);
+
+                    yield return 0;
+                }
+
+            }
+        }
+        IEnumerable<int> Untitled5(float angle, float acceleration)
+        {
+            
+            while (true)
+            {
+
+                for (int i = 0; i < 360; i++)
+                {
+                    Vector2 velocity = new Vector2((float)Math.Cos((angle + i).ToRadian()), (float)Math.Sin((angle + i).ToRadian()));
+                    Velocity = velocity.ScaleTo(3f);
+
+                    yield return 0;
+                }
+
+            }
+        }
+
+        IEnumerable<int> Untitled6(float angle, float acceleration)
+        {
+
+            while (true)
+            {
+
+                for (int i = 0; i < 360; i++)
+                {
+                    Vector2 velocity = new Vector2((float)Math.Cos((angle).ToRadian()), (float)Math.Sin((angle + i).ToRadian()));
+                    Velocity = velocity.ScaleTo(6f);
+
+                    yield return 0;
+                }
+
+            }
+        }
+
+
 
         private void AddMovement(IEnumerable<int> movement)
         {
@@ -199,15 +260,7 @@ namespace STG.Entity
         public static EnemyBullet LinearBullet(Texture2D image, Vector2 position, float acceleration, float angle)
         {
             var bullet = new EnemyBullet(image, position);
-            bullet.AddMovement(bullet.Untitled2(angle, acceleration));
-
-            return bullet;
-        }
-
-        public static EnemyBullet LinearBullet2(Texture2D image, Vector2 position, float acceleration, float angle)
-        {
-            var bullet = new EnemyBullet(image, position);
-            bullet.AddMovement(bullet.Untitled3(angle, acceleration));
+            bullet.AddMovement(bullet.Untitled6(angle, acceleration));
 
             return bullet;
         }

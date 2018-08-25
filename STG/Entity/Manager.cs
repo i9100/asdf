@@ -44,6 +44,11 @@ namespace STG.Entity
                 addedEntities.Add(entity);
         }
 
+        public static void Clear()
+        {
+            entities.Clear();
+        }
+
         private static bool IsColliding(Entity a, Entity b)
         {
             float radius = a.Radius + b.Radius;
@@ -52,7 +57,7 @@ namespace STG.Entity
 
         private static bool IsOutofBound(Vector2 position)
         {
-            return position.X < 220 || position.X > 1060 || position.Y < -100 || position.Y > 1060;
+            return position.X < 120 || position.X > 1160 || position.Y < -200 || position.Y > 1160;
         }
 
         private static void HandleCollisions()
@@ -85,8 +90,9 @@ namespace STG.Entity
 
                 if (IsColliding(enemyBullets[i], Player.Instance))
                 {
-                    //enemies.ForEach(e => e.Kill());
-                    //enemyBullets.ForEach(b => b.Kill());
+                   Player.Instance.Kill();
+                   enemies.ForEach(e => e.Kill());
+                   enemyBullets.ForEach(b => b.Kill());
                 }
             }
         }
@@ -108,7 +114,6 @@ namespace STG.Entity
                     AddEntity(entity);
 
                 addedEntities.Clear();
-
 
                 entities = entities.Where(x => !x.IsExpired).ToList();
                 enemies = enemies.Where(x => !x.IsExpired).ToList();
