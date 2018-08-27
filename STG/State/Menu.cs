@@ -15,6 +15,8 @@ namespace STG.State
 
         private readonly string[] titleMenus = { "Start", "Settings", "Exit" };
 
+        private readonly string[] settingMenus = { "Fullscreen", "Back" };
+
         private readonly string[] difficultyMenus = { "Easy", "Normal", "Back" };
 
         string[] currentMenus;
@@ -63,9 +65,12 @@ namespace STG.State
                     //currentMenus = difficultyMenus;
                     main.ChangeState(new Playing(main, graphics));
                     break;
-                case "Easy":
+                /*case "Easy":
                     break;
                 case "Normal":
+                    break;*/
+                case "Settings":
+                    currentMenus = settingMenus;
                     break;
                 case "Back":
                     currentMenus = titleMenus;

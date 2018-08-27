@@ -104,15 +104,15 @@ namespace STG.Entity
 
         public static void Stage1Type9(Vector2 position)
         {
-            var enemy = new Enemy(Content.Loader.Enemy1, position, 45);
+            var enemy = new Enemy(Content.Loader.Enemy2, position, 45);
 
             enemy.AddBehavior(enemy.MoveInAngle(90f, 2f, 0.97f), enemy.Movements);
 
-            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.EllipseBullet_B, 0.5f, 5, 200, 20, 24, 10, 120), enemy.ShootingPatterns);
-            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.EllipseBullet_Y, 1f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
-            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.EllipseBullet_G, 1f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
-            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.EllipseBullet_V, 2f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
-            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.EllipseBullet_W, 2f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
+            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.SmallBullet_B, 0.5f, 5, 200, 20, 24, 10, 120), enemy.ShootingPatterns);
+            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.MediumBullet_Y, 1f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
+            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.SmallBullet_G, 1f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
+            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.SmallBullet_V, 2f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
+            enemy.AddBehavior(enemy.SprayMultiple(Content.Loader.SmallBullet_W, 2f, 2, 200, 20, 24, 5, 120), enemy.ShootingPatterns);
 
             Manager.Add(enemy);
         }

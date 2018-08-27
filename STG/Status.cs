@@ -12,6 +12,23 @@ namespace STG
         public static int Bombs { get; private set; }
         public static int Score { get; private set; }
         public static int Multiplier { get; private set; }
+        public static int Power
+        {
+            get
+            {
+                return Power;
+            }
+
+            private set
+            {
+                if (value < 0)
+                    Power = 0;
+                else if (value > 100)
+                    Power = 100;
+                else
+                    Power = value;
+            }
+        }
 
         public static bool IsGameOver { get { return Lives < 0; } }
 
@@ -44,7 +61,12 @@ namespace STG
             Bombs++;
         }
 
-        public static void RaiseMultiplier()
+        public static void AddPower()
+        {
+            Power++;
+        }
+
+        public static void AddMultiplier()
         {
             Multiplier++;
         }
@@ -57,6 +79,11 @@ namespace STG
         public static void RemoveBomb()
         {
             Bombs--;
+        }
+
+        public static void RemovePower()
+        {
+            Power -= 20;
         }
     }
 }

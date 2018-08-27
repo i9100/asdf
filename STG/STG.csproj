@@ -56,7 +56,7 @@
     <Compile Include="Particle\State.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Score\Parser.cs" />
+    <Compile Include="Score\Schema.cs" />
     <Compile Include="Stage\Spawner.cs" />
     <Compile Include="Stage\Schema.cs" />
     <Compile Include="Stage\StageDocument.cs" />

@@ -76,8 +76,9 @@ namespace STG.Entity
 
             for (int i = 0; i < enemies.Count; i++)
             {
-                if (IsColliding(enemies[i], Player.Instance))
+                if (IsColliding(enemies[i], Player.Instance) && !Player.Instance.IsInvincible)
                 {
+                    Player.Instance.Kill();
                     enemies.ForEach(e => e.Kill());
                     enemyBullets.ForEach(b => b.Kill());
                 }
@@ -88,7 +89,7 @@ namespace STG.Entity
                 if (IsOutofBound(enemyBullets[i].Position))
                     enemyBullets[i].Kill();
 
-                if (IsColliding(enemyBullets[i], Player.Instance))
+                if (IsColliding(enemyBullets[i], Player.Instance) && !Player.Instance.IsInvincible)
                 {
                    Player.Instance.Kill();
                    enemies.ForEach(e => e.Kill());

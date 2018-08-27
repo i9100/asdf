@@ -9,8 +9,15 @@ namespace STG.Input
 
         static int playerSpeed = 10;
         static Vector2 playerBulletVelocity = new Vector2(0, -40);
-        const int cooldown = 3;
+        static int cooldown = 3;
+        static int cooldown2 = 1;
         static int cooldownTimer = 0;
+        static int cooldownTimer2 = 0;
+
+        public static void SetCooldown(int value)
+        {
+            cooldown = value;
+        }
 
         public static void Update()
         {
@@ -37,12 +44,26 @@ namespace STG.Input
                 if (cooldownTimer <= 0)
                 {
                     cooldownTimer = cooldown;
-                    Entity.Manager.Add(new Entity.PlayerBullet(new Vector2(Entity.Player.Instance.Position.X - 17, Entity.Player.Instance.Position.Y - 13), playerBulletVelocity));
-                    Entity.Manager.Add(new Entity.PlayerBullet(new Vector2(Entity.Player.Instance.Position.X + 16, Entity.Player.Instance.Position.Y - 13), playerBulletVelocity));
+                    Entity.Player.Instance.Shoot(Status.Power);
+                }
+
+                if ((cooldown2 <= 0) && (Status.Power == 100))
+                {
+                    cooldownTimer2 = cooldown2;
+                    Entity.Player.Instance.ShootLaser();
+                }
+            }
+
+            if (keyboardState.IsKeyDown(Keys.X))
+            {
+                if (Status.Bombs > 0)
+                {
+                    Entity.Player.Instance.Bomb();
                 }
             }
 
             cooldownTimer--;
+            cooldownTimer2--;
         }
     }
 }

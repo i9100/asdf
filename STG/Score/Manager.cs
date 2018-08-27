@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace STG.Score
 {
-    class Manager
+    static class Manager
     {
         const string filename = "Score.dat";
 
@@ -13,20 +16,57 @@ namespace STG.Score
 
         static readonly byte[] salt = new byte[] { 1, 49, 38, 100, 26, 67, 29, 2, 17, 241 };
 
-        public static string ReadHighScore()
+        public static bool Exists { get { return File.Exists(filename); } }
+
+        public static string ReadScore()
         {
-            byte[] cipher = File.ReadAllBytes(filename);
+            try
+            {
+                byte[] cipher = File.ReadAllBytes(filename);
 
-            string text = Decrypt(cipher);
+                string text = Decrypt(cipher);
 
-            return text;
+                return text;
+            }
+            catch (FileNotFoundException e)
+            {
+                return "[]";
+            }
         }
 
-        public static void WriteHighScore(int score)
+        public static void WriteScore(string name, int score)
         {
-            byte[] cipher = Encrypt(score.ToString());
+            JArray scoreArray = JArray.Parse(ReadScore());
+
+            scoreArray.Append(name, score);
+
+            byte[] cipher = Encrypt(JsonConvert.SerializeObject(scoreArray));
 
             File.WriteAllBytes(filename, cipher);
+        }
+
+        public static IEnumerable<Schema> ParseScore(string jArray)
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<Schema>>(jArray);
+        }
+
+        private static void Append(this JArray jArray, string name, int score)
+        {
+            DateTime localDate = DateTime.Now;
+
+            var data = new JObject
+            {
+                { "name", name },
+
+                { "score", score },
+
+                { "date", localDate.ToString() }
+            };
+
+            if (jArray.Count > 10)
+                jArray.RemoveAt(9);
+
+            jArray.Add(data);
         }
 
         private static byte[] Encrypt(string text)

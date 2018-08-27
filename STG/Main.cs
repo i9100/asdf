@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.IO;
 
 namespace STG
 {
@@ -65,11 +66,13 @@ namespace STG
         /// </summary>
         protected override void Initialize()
         {
-            Score.Manager.WriteHighScore(200000);
             // TODO: Add your initialization logic here
+            if (!Score.Manager.Exists)
+                Score.Manager.WriteScore("Default", 100000);
+
             ParticleManager = new Particle.Manager<Particle.State>(1024 * 20, Particle.State.UpdateParticle);
 
-            Console.WriteLine(Score.Manager.ReadHighScore());
+            Console.WriteLine(Score.Manager.ReadScore());
 
             currentState.Initialize();
 
