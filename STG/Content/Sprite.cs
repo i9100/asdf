@@ -4,13 +4,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace STG.Content
 {
     //Import Fonts
-    static partial class Loader
+    static partial class Sprite
     {
         public static SpriteFont MainFont { get; private set; }
     }
 
     //Import Backgrounds
-    static partial class Loader
+    static partial class Sprite
     {
         public static Texture2D TitleMenuBackground { get; private set; }
         public static Texture2D TitleMenuWrapper { get; private set; }
@@ -18,10 +18,13 @@ namespace STG.Content
     }
 
     //Import In-Game Textures
-    static partial class Loader
+    static partial class Sprite
     {
         public static Texture2D Player { get; private set; }
+        public static Texture2D Player_Bomb { get; private set; }
         public static Texture2D PlayerBullet { get; private set; }
+        public static Texture2D PlayerBullet2 { get; private set; }
+        public static Texture2D PlayerBullet3 { get; private set; }
         public static Texture2D Enemy1 { get; private set; }
         public static Texture2D Enemy2 { get; private set; }
         public static Texture2D EllipseBullet_W { get; private set; }
@@ -42,17 +45,21 @@ namespace STG.Content
         public static Texture2D MediumBullet_B { get; private set; }
         public static Texture2D MediumBullet_V { get; private set; }
         public static Texture2D LineParticle { get; private set; }
+        public static Texture2D CircleParticle { get; private set; }
 
     }
-    static partial class Loader
+    static partial class Sprite
     {
         public static void Load(ContentManager content)
         {
             MainFont = content.Load<SpriteFont>("Asset/Font/MainFont");
 
             Player = content.Load<Texture2D>("Asset/Sprite/Player");
+            Player_Bomb = content.Load<Texture2D>("Asset/Sprite/Player_Bomb");
 
             PlayerBullet = content.Load<Texture2D>("Asset/Sprite/Bullet/PlayerBullet");
+            PlayerBullet2 = content.Load<Texture2D>("Asset/Sprite/Bullet/PlayerBullet2");
+            PlayerBullet3 = content.Load<Texture2D>("Asset/Sprite/Bullet/PlayerBullet3");
 
             EllipseBullet_W = content.Load<Texture2D>("Asset/Sprite/Bullet/EllipseBullet_W");
             EllipseBullet_R = content.Load<Texture2D>("Asset/Sprite/Bullet/EllipseBullet_R");
@@ -84,6 +91,7 @@ namespace STG.Content
             PlayingSideBar = content.Load<Texture2D>("Asset/Background/PlayingSideBar");
 
             LineParticle = content.Load<Texture2D>("Asset/Sprite/Particle/Line");
+            CircleParticle = content.Load<Texture2D>("Asset/Sprite/Particle/Circle");
         }
     }
 }

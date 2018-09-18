@@ -32,6 +32,12 @@ namespace STG.Entity
         }
 
         public abstract void Update();
+
+        public virtual void Kill()
+        {
+            IsExpired = true;
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(image, Position, null, color, Orientation, Size / 2f, 1f, 0, 0.9f);

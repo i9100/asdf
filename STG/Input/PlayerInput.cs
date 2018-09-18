@@ -5,14 +5,11 @@ namespace STG.Input
 {
     static class PlayerInput
     {
-        static KeyboardState keyboardState;
+        static KeyboardState oldState;
 
         static int playerSpeed = 10;
-        static Vector2 playerBulletVelocity = new Vector2(0, -40);
-        static int cooldown = 3;
-        static int cooldown2 = 1;
+        static int cooldown = 4;
         static int cooldownTimer = 0;
-        static int cooldownTimer2 = 0;
 
         public static void SetCooldown(int value)
         {
@@ -21,7 +18,8 @@ namespace STG.Input
 
         public static void Update()
         {
-            keyboardState = Keyboard.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
+
             if (keyboardState.IsKeyDown(Keys.Left))
                 Entity.Player.Instance.Position.X -= playerSpeed;
 
@@ -46,15 +44,9 @@ namespace STG.Input
                     cooldownTimer = cooldown;
                     Entity.Player.Instance.Shoot(Status.Power);
                 }
-
-                if ((cooldown2 <= 0) && (Status.Power == 100))
-                {
-                    cooldownTimer2 = cooldown2;
-                    Entity.Player.Instance.ShootLaser();
-                }
             }
 
-            if (keyboardState.IsKeyDown(Keys.X))
+            if (keyboardState.IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X))
             {
                 if (Status.Bombs > 0)
                 {
@@ -63,7 +55,7 @@ namespace STG.Input
             }
 
             cooldownTimer--;
-            cooldownTimer2--;
+            oldState = keyboardState;
         }
     }
 }

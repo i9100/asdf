@@ -8,7 +8,7 @@ namespace STG.Particle
 {
     public class Manager<T>
     {
-        private Action<Particle> updateParticle;
+        private readonly Action<Particle> updateParticle;
         private CircularParticleArray particleList;
 
         public Manager(int capacity, Action<Particle> updateParticle)

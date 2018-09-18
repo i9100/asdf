@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace STG.Stage
 {
     class Spawner
     {
+
         private static void InvokeMethod(string method, object[] args)
         {
             MethodInfo methodInfo = typeof(Entity.Enemy).GetMethod(method, BindingFlags.Public | BindingFlags.Static);
@@ -42,6 +44,9 @@ namespace STG.Stage
 
                     InvokeMethod(stageData.Name, args);
                 }
+
+                if (Status.IsGameOver)
+                    return;
             }
         }
     }

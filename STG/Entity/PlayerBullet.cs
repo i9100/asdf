@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace STG.Entity
 {
     class PlayerBullet : Entity
     {
-        public PlayerBullet(Vector2 position, Vector2 velocity)
+        public PlayerBullet(Texture2D image, Vector2 position, Vector2 velocity)
         {
-            image = Content.Loader.PlayerBullet;
+            this.image = image;
             Position = position;
             Velocity = velocity;
             Orientation = Velocity.ToAngle();

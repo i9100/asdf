@@ -5,11 +5,30 @@ using System;
 
 namespace STG.Entity
 {
-    partial class EnemyBullet : Entity
+    partial class EnemyBullet : SubEntity
+    {
+        public static EnemyBullet LinearBullet(Texture2D image, Vector2 position, float acceleration, float angle)
+        {
+            var bullet = new EnemyBullet(image, position);
+            bullet.AddBehavior(bullet.movements, bullet.MoveStraight(angle, acceleration));
+
+            return bullet;
+        }
+
+        public static EnemyBullet SeekingBullet(Texture2D image, Vector2 position, float acceleration)
+        {
+            var bullet = new EnemyBullet(image, position);
+            bullet.AddBehavior(bullet.movements, bullet.MoveToPlayer(acceleration));
+
+            return bullet;
+        }
+    }
+
+    partial class EnemyBullet
     {
         private List<IEnumerator<int>> movements = new List<IEnumerator<int>>();
 
-        public EnemyBullet(Texture2D image, Vector2 position, float radiusDivider = 4f)
+        public EnemyBullet(Texture2D image, Vector2 position, float radiusDivider = 2f)
         {
             this.image = image;
             Position = position;
@@ -18,17 +37,10 @@ namespace STG.Entity
 
         public override void Update()
         {
-            ApplyMovements();
-            Position += Velocity;
-            Velocity *= 0.8f;
+            ApplyBehaviors(movements);
+            base.Update();
             Orientation = Velocity.ToAngle();
         }
-
-        public void Kill()
-        {
-            IsExpired = true;
-        }
-
     }
 
     partial class EnemyBullet
@@ -234,43 +246,6 @@ namespace STG.Entity
                 }
 
             }
-        }
-
-
-
-        private void AddMovement(IEnumerable<int> movement)
-        {
-            movements.Add(movement.GetEnumerator());
-        }
-
-
-        private void ApplyMovements()
-        {
-            for (int i = 0; i < movements.Count; i++)
-            {
-                if (!movements[i].MoveNext())
-                    movements.RemoveAt(i--);
-            }
-        }
-
-    }
-
-    partial class EnemyBullet
-    {
-        public static EnemyBullet LinearBullet(Texture2D image, Vector2 position, float acceleration, float angle)
-        {
-            var bullet = new EnemyBullet(image, position);
-            bullet.AddMovement(bullet.Untitled6(angle, acceleration));
-
-            return bullet;
-        }
-
-        public static EnemyBullet SeekingBullet(Texture2D image, Vector2 position, float acceleration)
-        {
-            var bullet = new EnemyBullet(image, position);
-            bullet.AddMovement(bullet.MoveToPlayer(acceleration));
-
-            return bullet;
         }
     }
 }

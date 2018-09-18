@@ -16,6 +16,7 @@ namespace STG.Entity
         static List<Enemy> enemies = new List<Enemy>();
         static List<EnemyBullet> enemyBullets = new List<EnemyBullet>();
         static List<PlayerBullet> playerBullets = new List<PlayerBullet>();
+        static List<Item> items = new List<Item>();
 
         private static void AddEntity(Entity entity)
         {
@@ -26,6 +27,8 @@ namespace STG.Entity
                 enemies.Add(entity as Enemy);
             else if (entity is EnemyBullet)
                 enemyBullets.Add(entity as EnemyBullet);
+            else if (entity is Item)
+                items.Add(entity as Item);
         }
 
         public static int Count
@@ -96,6 +99,32 @@ namespace STG.Entity
                    enemyBullets.ForEach(b => b.Kill());
                 }
             }
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (IsOutofBound(items[i].Position))
+                    items[i].Kill();
+
+                if (IsColliding(items[i], Player.Instance))
+                {
+                    var type = items[i].Type;
+
+                    switch (type)
+                    {
+                        case Item.ItemType.Power:
+                            Status.AddPower();
+                            break;
+                        case Item.ItemType.Life:
+                            Status.AddLife();
+                            break;
+                        case Item.ItemType.Bomb:
+                            Status.AddBomb();
+                            break;
+                    }
+
+                    items[i].Kill();
+                }
+            }
         }
 
         public static void Update(GameTime gameTime)
@@ -120,12 +149,18 @@ namespace STG.Entity
                 enemies = enemies.Where(x => !x.IsExpired).ToList();
                 playerBullets = playerBullets.Where(x => !x.IsExpired).ToList();
                 enemyBullets = enemyBullets.Where(x => !x.IsExpired).ToList();
+                items = items.Where(x => !x.IsExpired).ToList();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
             
+        }
+
+        public static IEnumerable<Entity> GetEntitiesInRange(Vector2 Position, float radius)
+        {
+            return entities.Where(e => Vector2.DistanceSquared(Position, e.Position) < radius * radius);
         }
 
         public static void Draw(SpriteBatch spriteBatch)

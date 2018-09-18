@@ -12,21 +12,24 @@ namespace STG
         public static int Bombs { get; private set; }
         public static int Score { get; private set; }
         public static int Multiplier { get; private set; }
+
+        private static int power;
+
         public static int Power
         {
             get
             {
-                return Power;
+                return power;
             }
 
             private set
             {
                 if (value < 0)
-                    Power = 0;
+                    power = 0;
                 else if (value > 100)
-                    Power = 100;
+                    power = 100;
                 else
-                    Power = value;
+                    power = value;
             }
         }
 
@@ -43,6 +46,7 @@ namespace STG
             Lives = 0;
             Bombs = 3;
             Multiplier = 1;
+            Power = 0;
         }
 
         public static void AddScore(int point)
@@ -84,6 +88,12 @@ namespace STG
         public static void RemovePower()
         {
             Power -= 20;
+        }
+
+        public static void ResetBomb()
+        {
+            if (Bombs < 3)
+                Bombs = 3;
         }
     }
 }

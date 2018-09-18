@@ -37,6 +37,7 @@ namespace STG
         {
             double theta = rand.NextDouble() * 2 * Math.PI;
             float length = rand.NextFloat(minLength, maxLength);
+
             return new Vector2(length * (float)Math.Cos(theta), length * (float)Math.Sin(theta));
         }
 

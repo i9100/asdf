@@ -49,7 +49,7 @@ namespace STG
             graphics = new GraphicsDeviceManager(this)
             {
                 PreferredBackBufferWidth = 1280,
-                PreferredBackBufferHeight = 720,
+                PreferredBackBufferHeight = 960,
                 IsFullScreen = false
             };
 
@@ -87,7 +87,7 @@ namespace STG
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            STG.Content.Loader.Load(Content);
+            STG.Content.Sprite.Load(Content);
             // TODO: use this.Content to load your game content here
         }
 

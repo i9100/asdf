@@ -42,7 +42,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ColorUtility.cs" />
-    <Compile Include="Content\Loader.cs" />
+    <Compile Include="Content\Audio.cs" />
+    <Compile Include="Content\Sprite.cs" />
+    <Compile Include="DrawUtility.cs" />
+    <Compile Include="Entity\Item.cs" />
+    <Compile Include="Entity\SubEntity.cs" />
     <Compile Include="Score\Manager.cs" />
     <Compile Include="Entity\EnemyBullet.cs" />
     <Compile Include="Entity\Entity.cs" />

@@ -54,7 +54,7 @@ namespace STG.State
 
             string currentMenu = Menus[currentIndex];
 
-            spriteBatch.DrawString(Content.Loader.MainFont, currentMenu, new Vector2(50, positionY + space), Color.White);
+            spriteBatch.DrawString(Content.Sprite.MainFont, currentMenu, new Vector2(50, positionY + space), Color.White);
         }
 
         private void Select(string selectedMenu)
@@ -114,12 +114,12 @@ namespace STG.State
 
             graphics.Clear(Color.Black);
             spriteBatch.Begin();
-            spriteBatch.Draw(Content.Loader.TitleMenuBackground, new Rectangle(0, 0, 1280, 960), Color.White);
-            spriteBatch.Draw(Content.Loader.TitleMenuWrapper, new Rectangle(0, 0, 300, 960), new Color(0, 0, 0, 200));
+            spriteBatch.Draw(Content.Sprite.TitleMenuBackground, new Rectangle(0, 0, 1280, 960), Color.White);
+            spriteBatch.Draw(Content.Sprite.TitleMenuWrapper, new Rectangle(0, 0, 300, 960), new Color(0, 0, 0, 200));
 
             foreach (string name in currentMenus)
             {
-                spriteBatch.DrawString(Content.Loader.MainFont, name, new Vector2(50, menuPositionY), Color.Gray);
+                spriteBatch.DrawString(Content.Sprite.MainFont, name, new Vector2(50, menuPositionY), Color.Gray);
                 menuPositionY += space;
             }
 

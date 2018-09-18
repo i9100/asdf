@@ -7,8 +7,7 @@ namespace STG.State
     class Playing : State
     {
         int alpha = 0;
-
-        int lives = Status.Lives;
+        readonly int lives = Status.Lives;
 
         public Playing(Main main, GraphicsDevice graphics) : base(main, graphics)
         {
@@ -31,9 +30,9 @@ namespace STG.State
 
             if (Status.IsGameOver)
             {
-                alpha++;
+                alpha += 2;
 
-                if (alpha > 320)
+                if (alpha > 200)
                     main.ChangeState(new Menu(main, graphics));
             }    
         }
@@ -48,18 +47,19 @@ namespace STG.State
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.BackToFront);
-            spriteBatch.Draw(Content.Loader.PlayingSideBar, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 1f, 0, 0);
+            spriteBatch.Draw(Content.Sprite.PlayingSideBar, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 1f, 0, 0);
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.BackToFront);
-            spriteBatch.DrawString(Content.Loader.MainFont, "Score: " + Status.Score, new Vector2(25, 50), Color.White);
+            spriteBatch.DrawString(Content.Sprite.MainFont, "Score: " + Status.Score, new Vector2(25, 50), Color.White);
 
             if (Status.Lives < 0)
-                spriteBatch.DrawString(Content.Loader.MainFont, "Lives: " + 0, new Vector2(25, 150), Color.White);
+                spriteBatch.DrawString(Content.Sprite.MainFont, "Lives: " + 0, new Vector2(25, 150), Color.White);
             else
-                spriteBatch.DrawString(Content.Loader.MainFont, "Lives: " + Status.Lives, new Vector2(25, 150), Color.White);
+                spriteBatch.DrawString(Content.Sprite.MainFont, "Lives: " + Status.Lives, new Vector2(25, 150), Color.White);
 
-            spriteBatch.DrawString(Content.Loader.MainFont, "Bombs: " + Status.Bombs, new Vector2(25, 200), Color.White);
+            spriteBatch.DrawString(Content.Sprite.MainFont, "Bombs: " + Status.Bombs, new Vector2(25, 200), Color.White);
+            spriteBatch.DrawStringWithStroke(Content.Sprite.MainFont, "Power: " + Status.Power, new Vector2(25, 250), Color.White, Color.Black, 1f);
             spriteBatch.End();
 
             if (Status.IsGameOver)
@@ -68,7 +68,7 @@ namespace STG.State
                 blackTexture.SetData(new[] { Color.White });
 
                 spriteBatch.Begin();
-                spriteBatch.Draw(blackTexture, new Rectangle(0, 0, 1280, 720), new Color(0, 0, 0, alpha));
+                spriteBatch.Draw(blackTexture, new Rectangle(0, 0, 1280, 960), new Color(0, 0, 0, alpha));
                 spriteBatch.End();
             }
         }
